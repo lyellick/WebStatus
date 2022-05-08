@@ -1,3 +1,6 @@
+using JSONStashAPI.CSharp;
+using JSONStashAPI.CSharp.Models;
+
 namespace WebStatus.WorkerService
 {
     public class Worker : BackgroundService
@@ -14,12 +17,23 @@ namespace WebStatus.WorkerService
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             string host = _configuration["host"];
-            string stash = _configuration["stash"];
             string key = _configuration["key"];
+            string stash = _configuration["stash"];
             string addresses = _configuration["addresses"];
+
+            JSONStash storage = new(host);
 
             while (!stoppingToken.IsCancellationRequested)
             {
+                try
+                {
+                    StashData stashData = await storage.GetStashDataAsync(key, stash);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);
             }
