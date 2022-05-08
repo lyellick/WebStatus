@@ -27,7 +27,7 @@ namespace WebStatus.WorkerService
             {
                 try
                 {
-                    StashData stashData = await storage.GetStashDataAsync(key, stash);
+                    StashResponse stashData = await storage.GetStashDataAsync(key, stash);
                 }
                 catch (Exception ex)
                 {
