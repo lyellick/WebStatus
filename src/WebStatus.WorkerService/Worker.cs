@@ -1,5 +1,8 @@
 using JSONStashAPI.CSharp;
 using JSONStashAPI.CSharp.Models;
+using JSONStashAPI.CSharp.Extensions;
+using Newtonsoft.Json;
+using WebStatus.Common.Models;
 
 namespace WebStatus.WorkerService
 {
@@ -27,7 +30,7 @@ namespace WebStatus.WorkerService
             {
                 try
                 {
-                    StashResponse stashData = await storage.GetStashDataAsync(key, stash);
+                    StashResponse response = await storage.GetStashDataAsync(key, stash);
                 }
                 catch (Exception ex)
                 {
